@@ -1,0 +1,8 @@
+jlcpcb/
+KiCad_Left-backups/
+**/*/fp-info-cache
+
+.prettierignore
+
+qmk_firmware/
+*.zip

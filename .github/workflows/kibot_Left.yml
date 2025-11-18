@@ -1,0 +1,29 @@
+name: KiBot_Left
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "KiCad_Left/**/*.kicad_sch"
+      - "KiCad_Left/**/*.kicad_pcb"
+      - "KiCad_Left/**/*.yml"
+      - ".github/workflows/kibot.yml"
+
+jobs:
+  generate-output_Left:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4.2.2
+      - uses: INTI-CMNB/KiBot@v2_dk9
+        with:
+          config: KiCad_Left/KiBot/config.yml
+          dir: output_Left
+          schema: KiCad_Left/Papi72_Left.kicad_sch
+          board: KiCad_Left/Papi72_Left.kicad_pcb
+      - name: upload results
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: gerber-and-docs_Left
+          path: output_Left/
